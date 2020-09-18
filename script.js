@@ -1,29 +1,43 @@
-console.log(moment().format(hA));
+// this makes sure the code inside does not execute until the DOM is ready.
+// $(function() {
+//     console.log( "ready!" );
 
-//TODO: create one row with time, text area, and button using - jq
+    // --------------- dom elements ----------------
+    const container = $("div")
 
-    //design layout in html first 
-//     <form class="row hour time-block">
-                
-//     <article class="col-md-2">
-//         9am
-//     </article>
-
-//     <textarea class="col-md-8">
-        
-//     </textarea>
-
+    //--------- Jquery DOM elements to be appended------
+        //- make a variable for each of the planned elements below
+    var formRow = $(`<form id="row hour time-block">`)
+    var article = $(`<article class="col-md-2">`)
+    var textarea = $(`<textarea class="col-md-8">`)
+    var button = $(`<button class="saveBtn col-md-2">`)
     
-//     <button class="saveBtn col-md-2">
+    // ------------ declare variables --------- 
+    const mmddtt = moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
+        // display date and time in header 
+    $("#currentDay").text(mmddtt)
+    //console.log(mmddtt)
+    var milTime = moment().format("H")
+    var civTime = moment().format("h A")
+    var arr95 = [
+        {
+        "AM" : ["9","10","11"],
+        "PM" : ["12","1","2","3","4","5"]
+        }
+    ];
+    console.table(arr95)
+    //console.log("military time:", milTime)
+    console.log("civilian time:", civTime)
 
-//     </button>
-    
-//      </form>
-//TODO: find a way to append these in the order 
+
+//TODO: find a way to append these in  order 
     // find a way to populate with appropriate information
         //add time recognition using moment.js - look at classes in html 
 
-//TODO: display current day at top of page use moment.js a p tag already exists
+        //adding times to each article ( be aware of conversions from mil to civil)
+        //mil times 9-17, civil 9-12, 1-5
+        //when coding for article, make a for loop that i++ text=[i]
+        // article for loop first - we need it to add key and value 
 
 //TODO:create array to hold the hours 9am -5pm
 
@@ -47,4 +61,6 @@ console.log(moment().format(hA));
 
 //TODO: on refresh, the data persists - retrieve data on page load - localStorage.getItem - show data back to where it came from
         // how can i know what text from local storage goes to what area) - try to make the key inherent with the click area .this? replace button with radio?
+
+//}); end of $document. function
 
