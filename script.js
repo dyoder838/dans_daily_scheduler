@@ -3,16 +3,20 @@ $(function() {
     console.log( "ready!" );
 
     // --------------- dom elements ----------------
-    var container = $("div")
+   
+    var container = $("div");
 
-    
+    //----- lesson learned (took 3 hours) -------
+        // var elements used in loops, must be declared in loops 
+        //if you want to append in loops
+
     // ------------ declare variables --------- 
-    const mmddtt = moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
-        // display date and time in header 
-    $("#currentDay").text(mmddtt)
-    //console.log(mmddtt)
-    var milTime = moment().format("HH")
-    var civTime = moment().format("h A")
+    const mmddtt = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
+    
+    var milTime = moment().format("HH");
+   
+    var civTime = moment().format("h A");
+   
     var arr95 = [
         {
             id: "0",
@@ -78,126 +82,59 @@ $(function() {
             reminder: ""
         },
         
-    ]
-    console.table(arr95)
-    console.log("military time:", milTime)
-    console.log("civilian time:", civTime)
+    ];
 
+    // Display date and time in header. 
+    $("#currentDay").text(mmddtt);
 
-//TODO: find a way to append these in  order 
-    // find a way to populate with appropriate information
-        //add time recognition using moment.js - look at classes in html 
-
-        //adding times to each article ( be aware of conversions from mil to civil)
-        //mil times 9-17, civil 9-12, 1-5
-        //when coding for article, make a for loop that i++ text=[i]
-        // article for loop first - we need it to add key and value 
-        // Start building Time box portion of row
-    //create the for each loop WITH the array
+// Construct the html to append !!! declare variables being used in the loop! or they wont loop.
+    // Create the forEach loop WITH the array (arr95). this will loop 9 times (the number of objects in the array).
+    // We use forEach because we are looping multiple variables.
+    // "thisHour" was chosen because each iteration we create represents an hour (this is the array inside the loop).
     arr95.forEach(function(thisHour) {
-        
-    var formRow = $("<form class='row hour time-block'>")
-    var article = $("<article class='col-md-2'>")
-    var textarea = $("<textarea class='col-md-8'>")
-    var button = $("<button class='saveBtn col-md-2'>")
-    var icon = $("<i class='far fa-save fa-lg'> </i>")
-    //     console.table("table thisHour", thisHour)
-        // make all elements in this function, its how we match the arrays to the elements
-            // proceed in this order formRow, article, textarea, button, icon
-            // var formRow = $(`<form id="row hour time-block">`)
-            // var article = $(`<article class="col-md-2">`)
-            // var textarea = $(`<textarea class="col-md-8">`)
-            // var button = $(`<button class="saveBtn col-md-2">`)
+    
+        // Make all elements in this function - or they wont loop.
+        // Applying all constants here makes for less code later.
+            var formRow = $("<form class='row hour time-block'>");
+            var article = $("<article class='col-md-2'>");
+            var textarea = $("<textarea class='col-md-8'>");
+            var button = $("<button class='saveBtn col-md-2'>");
+            var icon = $("<i class='far fa-save fa-lg'> </i>");
+    
+        // Apply variable hours and meridiems to article (the hour tab) from the array as text.
+        // This is what labels the left most column with its time and AM/PM.
+            article.text(`${thisHour.hour} ${thisHour.meridiem}`);
             
-            //create the div $("<>") var div=
-            // add content div.text(content to add)
-            // add to page parentDiv.append(your variable for element creation)
-    // var container = $("div")
+        // Apply variables to textarea.
+            // Apply attribute id from the array for easy visual identification.
+            // Apply css class description - I forgot to add it in the var. 
+            textarea.attr("id", thisHour.id);
+            textarea.addClass("description");
        
-        // create articles (the hour tab)
-            article.text(`${thisHour.hour} ${thisHour.meridiem}`)
-                //console.log("article with hours?", article)
-
-        // create textareas
-            textarea.attr("id", thisHour.id)
-            textarea.addClass("description")
-           
+            // Apply css classes to textarea by time for past, present, and future, 
+            // so textarea changes color according to time dynamically. 
             if (thisHour.time < milTime) {
                 textarea.addClass("past")
             
-            } if (thisHour.time == milTime){
+            } if (thisHour.time == milTime) {
                 textarea.addClass("present")
             
             } if (thisHour.time > milTime) {
                 textarea.addClass("present")
-            }
-           // console.log("whats happening to textarea?:", textarea)
+            };
            
-
-        // create buttons
-        
-        
-        container.append(formRow)
-            formRow.append(article, textarea, button)
-            console.log("what is happening to form row?" , formRow)
-                button.append(icon)
-        
+        // Append elements to the dom in parent order, I used indentation for visual effect.
+        // container is the parent to formRow.
+        container.append(formRow);
+            // formRow is parent to article, textarea, and button.
+            formRow.append(article, textarea, button);
+                // button is parent to icon.
+                button.append(icon);
+    
     });
-
-    // -------------------- example from class
-    // $.ajax({
-    //     url: queryURL,
-    //     method: "GET"
-    //   }).then(function(response) {
-    //       console.log(response)
-    //       var infoHere = $("#movies-view")
-          
-    //           var newInfo = $("<div>")
-    //           infoHere.append(newInfo)
-
-    //               var rating = $("<p>").text("Rating: " + response.Rated)
-    //               newInfo.append(rating)
-
-    //               var releaseDate = $("<p>").text("Released: " + response.Released)
-    //               newInfo.append(releaseDate)
-                  
-    //               var plot = $("<p>").text("Plot: " + response.Plot)
-    //               newInfo.append(plot)
-
-    //               var poster = $("<img>").attr("src", response.Poster)
-    //               console.log("image format: ", response.Poster)
-                  
-    //               newInfo.append(poster)
-                  
-
-    // function renderHour(newTimeBox, i) {
-    // if (i < 12) {
-    //     newTimeBox.text(i + ":00 AM");
-    // } else if (i === 12) {
-    //     newTimeBox.text(i + ":00 PM")
-    // } else {
-    //     let tempTime = i - 12;
-    //     newTimeBox.text(tempTime + ":00 PM");
-    // };
-
-//     const currentTime = moment().format("H"); (edited) 
-// 12:59
-// This will give you hour in 24 hour format
-// 12:59
-// function setTimeBlocks(areaMod, i) {
-//     if (currentTime == i) {
-//         $(areaMod).addClass("present");
-//     } else if (currentTime > i) {
-//         $(areaMod).addClass("past");
-//     } else {
-//         $(areaMod).addClass("future");
-//     }
-// }
+        
 
 
-
-
-//TODO:using a for loop loop 9 times
  
 
 //TODO:loop over my array of hours and create form for row, create article, create textarea, create button,
