@@ -106,7 +106,7 @@ $(function() {
             article.text(`${thisHour.hour} ${thisHour.meridiem}`);
             
         // Apply variables to textarea.
-            // Apply attribute id from the array for easy visual identification.
+            // Apply attribute id from the array for use as a localStorage tag for saving data
             // Apply css class description - I forgot to add it in the var. 
             textarea.attr("id", thisHour.id);
             textarea.addClass("description");
@@ -134,22 +134,22 @@ $(function() {
     });
         
 
+//TODO: Make the clicks work for the save button. 
+    //I'm using a form element so .preventDefault(); must be used, or the form will clear with each click.
+    // Also, create the saving apparatus in the same function
+    $("button").on("click", function(save){
+        save.preventDefault()
+        // This will create a unique save point to every button, because we use "this" capturing the element clicked in an index
+        // This complex line connects the textarea location we want saved, to the save button, making it unique to that row.
+        var saveIndex = $(this).siblings(".description").children(".future").attr("id");
+        // This saves the value of the textarea to the array.
+        arr95[saveIndex].reminder = $(this).siblings(".description").children(".future").val();
+        // These call the save and load functions on click. 
+        saveText();
+        loadText();
+    });
 
- 
 
-//TODO:loop over my array of hours and create form for row, create article, create textarea, create button,
-
-//TODO:give them content, append them to the row, and then append the row to the page
-         
-//TODO:how can i compare the hours of my rows to the current time (use moment.js to get current time) use an array? 
-        // round hours? - or dont use minutes in programing - look under format in moment.js
-
-//TODO: give classes that elements need past, future, present  - ise if statments comparing current time to row time 
-//if===, class, if < , if >
-
-//TODO: click eventlistener for save button, im using a form element - .preventDefault();stop propagation!!
-
-//TODO: grab the value of the text area, save to a variable, text needs to be row specific - 9 data variables 
 
 //TODO: save to local storage - localStorage.setItem - 
 
