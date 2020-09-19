@@ -1,30 +1,23 @@
 // this makes sure the code inside does not execute until the DOM is ready.
-//$(function() {
+$(function() {
     console.log( "ready!" );
 
     // --------------- dom elements ----------------
     var container = $("div")
 
-    //--------- Jquery DOM elements to be appended------
-        //- make a variable for each of the planned elements below
-    var formRow = $("<form id='row hour time-block'>")
-    var article = $("<article class='col-md-2'>")
-    var textarea = $("<textarea class='col-md-8'>")
-    var button = $("<button class='saveBtn col-md-2'>")
-    var icon = $("<i>")
     
     // ------------ declare variables --------- 
     const mmddtt = moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
         // display date and time in header 
     $("#currentDay").text(mmddtt)
     //console.log(mmddtt)
-    var milTime = moment().format("H")
+    var milTime = moment().format("HH")
     var civTime = moment().format("h A")
     var arr95 = [
         {
             id: "0",
             hour: "9",
-            time: "9",
+            time: "09",
             meridiem: "am",
             reminder: ""
         },
@@ -87,7 +80,7 @@
         
     ]
     console.table(arr95)
-    //console.log("military time:", milTime)
+    console.log("military time:", milTime)
     console.log("civilian time:", civTime)
 
 
@@ -101,9 +94,14 @@
         // article for loop first - we need it to add key and value 
         // Start building Time box portion of row
     //create the for each loop WITH the array
-    arr95.forEach(function(thisHour){
-       // console.log("log thisHour", thisHour)
-       //  console.table("table thisHour", thisHour)
+    arr95.forEach(function(thisHour) {
+        
+    var formRow = $("<form class='row hour time-block'>")
+    var article = $("<article class='col-md-2'>")
+    var textarea = $("<textarea class='col-md-8'>")
+    var button = $("<button class='saveBtn col-md-2'>")
+    var icon = $("<i class='far fa-save fa-lg'> </i>")
+    //     console.table("table thisHour", thisHour)
         // make all elements in this function, its how we match the arrays to the elements
             // proceed in this order formRow, article, textarea, button, icon
             // var formRow = $(`<form id="row hour time-block">`)
@@ -115,32 +113,35 @@
             // add content div.text(content to add)
             // add to page parentDiv.append(your variable for element creation)
     // var container = $("div")
-        container.append(formRow)
+       
         // create articles (the hour tab)
             article.text(`${thisHour.hour} ${thisHour.meridiem}`)
-            formRow.append(article)
-            console.log("whats this element", article)
+                //console.log("article with hours?", article)
 
         // create textareas
             textarea.attr("id", thisHour.id)
+            textarea.addClass("description")
            
             if (thisHour.time < milTime) {
-                textarea.attr("class", ".past")
+                textarea.addClass("past")
             
-            } else if (thisHour.time === milTime){
-                textarea.attr("class", ".present")
+            } if (thisHour.time == milTime){
+                textarea.addClass("present")
             
-            }else if (thisHour.time > milTime) {
-                textarea.attr("class", ".present")
+            } if (thisHour.time > milTime) {
+                textarea.addClass("present")
             }
-            
-            formRow.append(textarea)
+           // console.log("whats happening to textarea?:", textarea)
+           
 
         // create buttons
-            
-            
-
-
+        
+        
+        container.append(formRow)
+            formRow.append(article, textarea, button)
+            console.log("what is happening to form row?" , formRow)
+                button.append(icon)
+        
     });
 
     // -------------------- example from class
@@ -218,6 +219,6 @@
 //TODO: on refresh, the data persists - retrieve data on page load - localStorage.getItem - show data back to where it came from
         // how can i know what text from local storage goes to what area) - try to make the key inherent with the click area .this? replace button with radio?
 
-//}); 
+}); 
 //end of $document. function
 
