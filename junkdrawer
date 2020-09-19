@@ -1,0 +1,11 @@
+  $("button").on("click", function(save){
+        save.preventDefault();
+        // This will create a unique save point to every button, because we use "this" capturing the element clicked in an index
+        // This complex line connects the textarea location we want saved, to the save button, making it unique to that row.(Records where the text came from.)
+        var saveIndex = $(this).siblings(".description").children(".future").attr("id");
+        // This saves the value of the textarea to the array.(Copies the text to the text index in the array.)
+        arr95[saveIndex].text = $(this).siblings(".description").children(".future").val();
+        // These call the save and load functions on click. 
+        saveText();
+        //loadText();
+    });
