@@ -123,9 +123,21 @@
 
         // create textareas
             textarea.attr("id", thisHour.id)
+           
             if (thisHour.time < milTime) {
                 textarea.attr("class", ".past")
-            } else if 
+            
+            } else if (thisHour.time === milTime){
+                textarea.attr("class", ".present")
+            
+            }else if (thisHour.time > milTime) {
+                textarea.attr("class", ".present")
+            }
+            
+            formRow.append(textarea)
+
+        // create buttons
+            
             
 
 
