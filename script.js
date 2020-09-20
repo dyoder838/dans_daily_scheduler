@@ -22,96 +22,60 @@ $(function() {
             hour: "9",
             time: "09",
             meridiem: "am",
-            text: ""
         },
         {
             id: "key1",
             hour: "10",
             time: "10",
             meridiem: "am",
-            text: ""
         },
         {
             id: "key2",
             hour: "11",
             time: "11",
             meridiem: "am",
-            text: ""
         },
         {
             id: "key3",
             hour: "12",
             time: "12",
             meridiem: "pm",
-            text: ""
         },
         {
             id: "key4",
             hour: "1",
             time: "13",
             meridiem: "pm",
-            text: ""
         },
         {
             id: "key5",
             hour: "2",
             time: "14",
             meridiem: "pm",
-            text: ""
         },
         {
             id: "key6",
             hour: "3",
             time: "15",
             meridiem: "pm",
-            text: ""
         },
         {
             id: "key7",
             hour: "4",
             time: "16",
             meridiem: "pm",
-            text: ""
         },
         {
             id: "key8",
             hour: "5",
             time: "17",
             meridiem: "pm",
-            text: ""
         },
         
     ];
-   // loadText();
-    // Display date and time in header. 
+   
+// Display date and time in header. 
     $("#currentDay").text(mmddtt);
-
-    // Saves text to localStorage - function is called from button click.
-   // function saveText() {
-        //localStorage.setItem("arr95", JSON.stringify(arr95));
-        
-   // };
-     
-    // Loads saved text to its corresponding location.
-    // We want the id of the clicked save button, and its corresponding text value. - te function is called on page load and button click.
-    //function loadText() {
-   //     arr95.forEach(function (_thisHour) {
-  //          $(`#${_thisHour.id}`).val(_thisHour.text);
-   //     });
-   // };
-    
-    // Sets any existing localStorage text to the "textarea", if it exists.
-    // function existingData() {
-    //     var storedDay = JSON.parse(localStorage.getItem("arr95"));
-
-    //     if (storedDay) {
-    //         arr95 = storedDay;
-    //     }
-
-    //     saveText();
-    //     loadText();
-    //}
-    
 
 // Construct the html to append !!! declare variables being used in the loop! or they wont loop.
     // Create the forEach loop WITH the array (arr95). this will loop 9 times (the number of objects in the array).
@@ -160,46 +124,73 @@ $(function() {
     
     });
     
-    // loads any existing data on the page
-    //existingData();
+    loadTextOnRefresh();
     
-// Make the clicks work for the save button. 
-    // I'm using a form element so .preventDefault(); must be used, or the form will clear with each click.
-    // Also, create the saving apparatus in the same function
+    // Make the clicks on save buttons save the text in "textarea".
+        // "textarea" by default sends the value of its text to its id, as long as the button pushed is -
+        // within its parent div.
+        // There is no need to treat each button and text area individually, so we group it all together.
+        // Whenever any save button is pushed, it saves every text area,
+        // This save function is slightly different, in that the key is intended to be the location of the save, not simply a key string in an array.
     $("button").on("click", function(save){
-        save.preventDefault();
-        // This will create a unique save point to every button, because we use "this" capturing the element clicked in an index
-        // This complex line connects the textarea location we want saved, to the save button, making it unique to that row.(Records where the text came from.)
-      for ( var i = 0; i < 9; i++ ) {
-          // this greates the location associated with the value 
-            var locationKey = "#key"+i
-            // this 
-            var value = document.getElementById(`key${i}`).value
-            console.log("key", locationKey );
-            console.log("value", value);
             
+            // I'm using a form element so .preventDefault(); must be used, or the form will clear with each click.
+        save.preventDefault();
+
+            // The key will need to be separated to a function that -
+            // makes the value associate the the textarea with the id (#key 0-9).
+        for ( var i = 0; i < 9; i++ ) {
+               
+                // This generates the id of the textarea associated with the value, so I can tell the value where to go.
+            var locationKey = "#key"+i
+                
+                // This pulls the value from the textarea by its id.
+            var value = $(locationKey).val();
+                //console.log("key", locationKey);
+                //console.log("value:", value);
+            
+                // Now we have a save location, with the saved text.
             localStorage.setItem(locationKey,value);
-            //location.reload();
+            
         };  
-    
+            
+                // Verify content of local storage.
+            //console.log("check local storage after save", localStorage);
+        
     });
 
-    
-       // keeping info on page 
-       // for (let i = 0; i < localStorage.length; i++) {
-            // we are not changing what the constant variables do here, we are adding to their value
-          
+    //load local storage
+            // There is no load button, I want the information to always be on the page no matter what.
+            // The only time this wouldn't hold true is if the user did not push the save button.
+            // A load feature is needed that runs on page refresh, but, after the elements are generated.
+    function loadTextOnRefresh(){
+            
+            // Local storage needs to be applied every time the page is refreshed, once for every textarea.
+        for (let i = 0; i < localStorage.length; i++) {
+                
+                // Remember, the keys in this have a different use than normal, they need to be used direct values to a textarea
+                // This pulls out the id of the location, saved as the string "#key(i)". i is a variable with the values 0-8
+                // key.(i) is a constant in programming language, 
+                // "#key(i)" refers to the id tag of <textarea>.
+            var locationKey = localStorage.key(i);
+            
+                // This pulls out the value of the key
+            var value = localStorage.getItem(locationKey);
+                // Check for integrity of data.
+            //console.log("loaded locationKey: ", locationKey);
+            //console.log("loaded location's value: ", value);
 
-          //  var key = storageArr.key;
-          //  var value = storageArr.getItem(key);
-            // this fancy code is short hand appending. backticks and ${} mean append
-          //  $({key}).innerHTML += `${value}`;
-         //   console.log("return key", key)
-           // console.log("return value", value)
-          //  console.log("storageArr", storageArr)
-       // });
+                // I want locationKey to direct where to load the value to. note we use val and not text; textarea text is a value.
+            $(locationKey).val(value);
+                
+        };
+
+    };    
     
 }); 
 
 //<---------------------------- huge thanks to Ibmoody @ github https://github.com/lbmoody/simple-day-planner.git ----------------->
                             // I had such a hard time with some of these concepts, thanks for sharing and helping me learn!
+
+                            //<------------ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea --- textarea explained
+                            //<------------ https://api.jquery.com/val/ --- jquery textarea manipulation explained
