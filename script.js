@@ -170,32 +170,34 @@ $(function() {
         save.preventDefault();
         // This will create a unique save point to every button, because we use "this" capturing the element clicked in an index
         // This complex line connects the textarea location we want saved, to the save button, making it unique to that row.(Records where the text came from.)
-      for ( var i = 0; i < 8; i++ ) {
-            var key = "#key"+i
+      for ( var i = 0; i < 9; i++ ) {
+          // this greates the location associated with the value 
+            var locationKey = "#key"+i
+            // this 
             var value = document.getElementById(`key${i}`).value
-            console.log("key", key );
+            console.log("key", locationKey );
             console.log("value", value);
             
-            localStorage.setItem(key,value);
-            location.reload();
+            localStorage.setItem(locationKey,value);
+            //location.reload();
         };  
     
     });
 
     
-        localStorage.forEach(function(storageArr){
-        //for (let i = 0; i < localStorage.length; i++) {
+       // keeping info on page 
+       // for (let i = 0; i < localStorage.length; i++) {
             // we are not changing what the constant variables do here, we are adding to their value
-            storageArr.preventDefault();
+          
 
-            var key = storageArr.key;
-            var value = storageArr.getItem(key);
+          //  var key = storageArr.key;
+          //  var value = storageArr.getItem(key);
             // this fancy code is short hand appending. backticks and ${} mean append
-            $({key}).innerHTML += `${value}`;
-            console.log("return key", key)
-            console.log("return value", value)
-            console.log("storageArr", storageArr)
-        });
+          //  $({key}).innerHTML += `${value}`;
+         //   console.log("return key", key)
+           // console.log("return value", value)
+          //  console.log("storageArr", storageArr)
+       // });
     
 }); 
 
