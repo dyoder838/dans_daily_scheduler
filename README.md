@@ -12,7 +12,7 @@ A style.css file was provided with code already completed - I had to create my d
 
 <h2> Screenshot <h2>
 
-![Dan's Daily Schedular](/assets/images/daily_planner.png)
+![Dan's Daily Schedular](/assets/images/daily_planner.PNG)
 
 <h2> Objectives </h2>
 
@@ -55,8 +55,8 @@ I created a forEach loop to dynamically generate the HTML.
 
 I made an on click function to trigger saving to local storage 
     
-    - This took me Hours to figure out because i did not know enough about textarea and their inherent functions, I tried super complex localStorage solutions employing JSON and stringify. 
-    then I learned (after about 10 hours) that textarea, by default, respond to buttons within their parent div. this knowledge simplified the process nearly exponentially. 
+    - This took me Hours to figure out because I did not know enough about textarea and its inherent functions, I tried super complex localStorage solutions employing JSON and stringify. 
+    then I learned (after about 10 hours) that textarea, by default, respond to buttons within its parent div. this knowledge simplified the process nearly exponentially. 
 
     - I discovered I could use the key as a location indicator for an element, by making it a reference to an element id. 
 
@@ -64,21 +64,21 @@ I made a load function to display any saved localStorage back to the textarea el
 
 <h2> Conclusion <h2>
 
-I learned so much about loops and local storage in this exercise. JSON and stringify still escape my grasp, but I am proud that I found a simple workaround. 
+    I learned so much about loops and local storage in this exercise. JSON and stringify still escape my grasp, but I am proud that I found a simple workaround. 
 
-I think I can simplify this project even more, and think I can figure out a way to do it without an array. 
+    I think I can simplify this project even more, and think I can figure out a way to do it without an array. 
 
-I also learned not to assume I know what elements are capable of - textarea can do so much! I think I could have simplified localStorage even more. 
+    I also learned not to assume I know what elements are capable of - textarea can do so much! I think I could have simplified localStorage even more. 
 
 <h2> Sources <h2>
 
-When I began this project, I relied heavily on others examples to figure out how to go about coding it. 
+    When I began this project, I relied heavily on others examples to figure out how to go about coding it. 
 
 
-- huge thanks to Ibmoody @ github https://github.com/lbmoody/simple-day-planner.git I had such a hard time with some of these concepts, thanks for sharing and helping me learn!
+    Huge thanks to Ibmoody @ github https://github.com/lbmoody/simple-day-planner.git I had such a hard time with some of these concepts, thanks for sharing and helping me learn!
 
-- textarea info was hard to find for some reason, these sites were instrumental in my understanding of them.
+    textarea info was hard to find for some reason, these sites were instrumental in my understanding of them.
 
-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea - textarea explained.
+    https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea - textarea explained.
 
-- https://api.jquery.com/val/ -jquery textarea manipulation explained.
+    https://api.jquery.com/val/ -jquery textarea manipulation explained.
