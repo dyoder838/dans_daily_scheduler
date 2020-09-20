@@ -3,7 +3,7 @@
 <h1> Dan's Daily Schedular</h1>
 
 This project is part of my web development course.
-The task is to create a daily planner page featuring dynamically updated HTML and CSS powered by jQuery. and also an introduction to API using Moment to supply time tracking function.
+The task is to create a daily planner page featuring dynamically updated HTML and CSS powered by jQuery and moment.js.
 
 A starter index.html was supplied with style and script links already included
 A style.css file was provided with code already completed - I had to create my dynamic HTML to include the provided css hooks.
