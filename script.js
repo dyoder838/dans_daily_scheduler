@@ -82,7 +82,7 @@ $(function() {
     // We use forEach because we are looping multiple variables.
     // "thisHour" was chosen because each iteration we create represents an hour - its arbitrary...(thisHour is the array, inside the loop).
     arr95.forEach(function(thisHour) {
-    
+        
         // Make all elements in this function - or they wont loop.
         // Applying all constants here makes for less code later.
             var formRow = $("<form class='row hour time-block'>");
@@ -104,11 +104,11 @@ $(function() {
             if (thisHour.time < milTime) {
                 textarea.addClass("past");
             
-            } if (thisHour.time == milTime) {
+            } if (thisHour.time === milTime) {
                 textarea.addClass("present");
             
             } if (thisHour.time > milTime) {
-                textarea.addClass("present");
+                textarea.addClass("future");
             };
            
             // Apply class: key0-8 from the array for use as a localStorage tag for saving data
