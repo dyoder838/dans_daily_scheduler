@@ -104,7 +104,7 @@ $(function() {
             if (thisHour.time < milTime) {
                 textarea.addClass("past");
             
-            } if (thisHour.time === milTime) {
+            } if (thisHour.time == milTime) {
                 textarea.addClass("present");
             
             } if (thisHour.time > milTime) {
